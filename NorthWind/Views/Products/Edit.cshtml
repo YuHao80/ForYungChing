@@ -7,10 +7,16 @@
 
 <h2>編輯</h2>
 
-@using (Html.BeginForm())
-{
+@if(ViewBag.ResultMsg != null) {
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode((string)ViewBag.ResultMsg));
+        alert(message);
+    </script>
+}
+
+@using(Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>編輯商品資料</h4>
         <hr />
@@ -21,7 +27,6 @@
                 @Html.Value("ProductID")
                 <div hidden>
                     @Html.EditorFor(model => model.ProductID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
